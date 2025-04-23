@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Recommended Foods</h1>
+    
+    <!-- Breakfast Section -->
+    <div class="mb-5">
+        <h2 class="mb-4">Breakfast</h2>
+        <div class="row">
+            {% if foods.breakfast %}
+                {% for food in foods.breakfast %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        {% if food.image_url %}
+                        <img src="{{ food.image_url }}" class="card-img-top" alt="{{ food.name }}" style="height: 200px; object-fit: cover;">
+                        {% else %}
+                        <div class="card-img-top bg-light" style="height: 200px; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-utensils fa-3x text-muted"></i>
+                        </div>
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ food.name }}</h5>
+                            <p class="card-text">{{ food.description }}</p>
+                            <p class="card-text"><strong>Price:</strong> ₹{{ "%.2f"|format(food.price) }}</p>
+                            <p class="card-text"><small class="text-muted">Health Benefits: {{ food.health_benefits }}</small></p>
+                            <p class="card-text"><small class="text-muted">Suitable for: {{ food.suitable_for }}</small></p>
+                            <form action="{{ url_for('add_to_cart', food_id=food.id) }}" method="POST">
+                                <div class="input-group mb-3">
+                                    <input type="number" class="form-control" name="quantity" value="1" min="1" max="10">
+                                    <button class="btn btn-primary" type="submit">Add to Cart</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        No breakfast items available for your health condition.
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Lunch Section -->
+    <div class="mb-5">
+        <h2 class="mb-4">Lunch</h2>
+        <div class="row">
+            {% if foods.lunch %}
+                {% for food in foods.lunch %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        {% if food.image_url %}
+                        <img src="{{ food.image_url }}" class="card-img-top" alt="{{ food.name }}" style="height: 200px; object-fit: cover;">
+                        {% else %}
+                        <div class="card-img-top bg-light" style="height: 200px; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-utensils fa-3x text-muted"></i>
+                        </div>
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ food.name }}</h5>
+                            <p class="card-text">{{ food.description }}</p>
+                            <p class="card-text"><strong>Price:</strong> ₹{{ "%.2f"|format(food.price) }}</p>
+                            <p class="card-text"><small class="text-muted">Health Benefits: {{ food.health_benefits }}</small></p>
+                            <p class="card-text"><small class="text-muted">Suitable for: {{ food.suitable_for }}</small></p>
+                            <form action="{{ url_for('add_to_cart', food_id=food.id) }}" method="POST">
+                                <div class="input-group mb-3">
+                                    <input type="number" class="form-control" name="quantity" value="1" min="1" max="10">
+                                    <button class="btn btn-primary" type="submit">Add to Cart</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        No lunch items available for your health condition.
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Dinner Section -->
+    <div class="mb-5">
+        <h2 class="mb-4">Dinner</h2>
+        <div class="row">
+            {% if foods.dinner %}
+                {% for food in foods.dinner %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        {% if food.image_url %}
+                        <img src="{{ food.image_url }}" class="card-img-top" alt="{{ food.name }}" style="height: 200px; object-fit: cover;">
+                        {% else %}
+                        <div class="card-img-top bg-light" style="height: 200px; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-utensils fa-3x text-muted"></i>
+                        </div>
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ food.name }}</h5>
+                            <p class="card-text">{{ food.description }}</p>
+                            <p class="card-text"><strong>Price:</strong> ₹{{ "%.2f"|format(food.price) }}</p>
+                            <p class="card-text"><small class="text-muted">Health Benefits: {{ food.health_benefits }}</small></p>
+                            <p class="card-text"><small class="text-muted">Suitable for: {{ food.suitable_for }}</small></p>
+                            <form action="{{ url_for('add_to_cart', food_id=food.id) }}" method="POST">
+                                <div class="input-group mb-3">
+                                    <input type="number" class="form-control" name="quantity" value="1" min="1" max="10">
+                                    <button class="btn btn-primary" type="submit">Add to Cart</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        No dinner items available for your health condition.
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

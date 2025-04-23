@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Our Menu</h1>
+    <div class="row">
+        {% for item in food_items %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                {% if item.image_url %}
+                <img src="{{ item.image_url }}" class="card-img-top" alt="{{ item.name }}" style="height: 200px; object-fit: cover;">
+                {% else %}
+                <div class="card-img-top bg-light" style="height: 200px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-utensils fa-3x text-muted"></i>
+                </div>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.name }}</h5>
+                    <p class="card-text">{{ item.description }}</p>
+                    <p class="card-text"><strong>Price:</strong> ₹{{ item.price }}</p>
+                    <p class="card-text"><small class="text-muted">Health Benefits: {{ item.health_benefits }}</small></p>
+                    <p class="card-text"><small class="text-muted">Suitable for: {{ item.suitable_for }}</small></p>
+                    <form action="{{ url_for('add_to_cart', item_id=item.id) }}" method="POST">
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" name="quantity" value="1" min="1" max="10">
+                            <button class="btn btn-primary" type="submit">Add to Cart</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %} 
